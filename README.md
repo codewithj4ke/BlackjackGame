@@ -16,7 +16,7 @@ Welcome to the Blackjack Game! This is a simple implementation of the classic ca
 
 ## Usage
 
-- **Deal Button:** Starts a new game by dealing two cards to both the user and the computer.
-- **Hit Button:** Draws an additional card for the user.
-- **Stand Button:** Ends the user's turn and allows the computer to draw cards until it reaches a score of 17 or higher.
-- **Scoreboard:** Displays the number of games played, wins, losses, and the win rate.
+**Deal Button:** Starts a new game by dealing two cards to both the user and the computer.
+**Hit Button:** Draws an additional card for the user.
+**Stand Button:** Ends the user's turn and allows the computer to draw cards until it reaches a score of 17 or higher.
+**Scoreboard:** Displays the number of games played, wins, losses, and the win rate.
