@@ -60,7 +60,7 @@ class BlackjackApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Blackjack Game")
-        self.root.geometry("800x600")  # Increased height for scoreboard
+        self.root.geometry("545x475")  # Increased height for scoreboard
         self.root.resizable(False, False)
 
         self.style = {
@@ -91,26 +91,30 @@ class BlackjackApp:
         # Scoreboard Section
         self.scoreboard_frame = tk.Frame(self.frame, bg=self.style["bg"])
         self.scoreboard_frame.grid(row=0, column=0, columnspan=4, pady=(0, 20), sticky="ew")
+        self.scoreboard_frame.grid_columnconfigure(0, weight=1)
+        self.scoreboard_frame.grid_columnconfigure(1, weight=1)
+        self.scoreboard_frame.grid_columnconfigure(2, weight=1)
+        self.scoreboard_frame.grid_columnconfigure(3, weight=1)
 
         self.games_played_label = tk.Label(
             self.scoreboard_frame, text="Games Played: 0", font=self.style["font_bold"], bg=self.style["bg"], fg="#FFEB3B"
         )
-        self.games_played_label.grid(row=0, column=0, padx=10)
+        self.games_played_label.grid(row=0, column=0, padx=10, sticky="ew")
 
         self.wins_label = tk.Label(
             self.scoreboard_frame, text="Wins: 0", font=self.style["font_bold"], bg=self.style["bg"], fg="#FFEB3B"
         )
-        self.wins_label.grid(row=0, column=1, padx=10)
+        self.wins_label.grid(row=0, column=1, padx=10, sticky="ew")
 
         self.losses_label = tk.Label(
             self.scoreboard_frame, text="Losses: 0", font=self.style["font_bold"], bg=self.style["bg"], fg="#FFEB3B"
         )
-        self.losses_label.grid(row=0, column=2, padx=10)
+        self.losses_label.grid(row=0, column=2, padx=10, sticky="ew")
 
         self.win_rate_label = tk.Label(
             self.scoreboard_frame, text="Win Rate: 0%", font=self.style["font_bold"], bg=self.style["bg"], fg="#FFEB3B"
         )
-        self.win_rate_label.grid(row=0, column=3, padx=10)
+        self.win_rate_label.grid(row=0, column=3, padx=10, sticky="ew")
 
         # Game UI
         self.logo_label = tk.Label(
@@ -180,6 +184,7 @@ class BlackjackApp:
                 self.is_game_over = True
                 self.result_label.config(text="You went over. You lose 😭", fg="#F44336")
                 self.update_statistics()
+                self.computer_cards_label.config(text=f"Computer's cards: {self.computer_cards} (Score: {calculate_score(self.computer_cards)})")
                 self.animate_loss()
             self.update_labels()
 
@@ -193,14 +198,19 @@ class BlackjackApp:
             result, color = compare(user_score, computer_score)
             self.result_label.config(text=result, fg=color)
             self.update_statistics()
+            self.computer_cards_label.config(text=f"Computer's cards: {self.computer_cards} (Score: {computer_score})")
             if color == "#F44336":
                 self.animate_loss()
 
     def update_labels(self):
         user_score = calculate_score(self.user_cards)
-        computer_score = calculate_score(self.computer_cards)
         self.user_cards_label.config(text=f"Your cards: {self.user_cards} (Score: {user_score})")
-        self.computer_cards_label.config(text=f"Computer's cards: {self.computer_cards} (Score: {computer_score})")
+        if self.is_game_over:
+            computer_score = calculate_score(self.computer_cards)
+            self.computer_cards_label.config(text=f"Computer's cards: {self.computer_cards} (Score: {computer_score})")
+        else:
+            # Show only partial information about the computer's cards when the game is not over
+            self.computer_cards_label.config(text=f"Computer's cards: {self.computer_cards[0]}, X")
 
     def update_statistics(self):
         self.stats["games_played"] += 1
