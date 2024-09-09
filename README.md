@@ -21,4 +21,4 @@ Welcome to the Blackjack Game! This is a simple implementation of the classic ca
 ## Requirements
 
 - Python 3.x
-- Tkinter (usually included with Python standard library)
+- `tkinter` (included with Python standard library)
