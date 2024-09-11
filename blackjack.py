@@ -1,3 +1,7 @@
+# Project: Blackjack Game
+# Application developed by: codewithj4ke - September 2024
+# Learning Python programming with the assistance of AI and online courses
+
 import tkinter as tk
 from tkinter import messagebox
 import random
@@ -228,7 +232,7 @@ class BlackjackApp:
 
     def end_game(self, result_message, color):
         """End the game and display the result."""
-        self.result_label.config(text=result_message, fg=color)
+        self.result_label.config(text=result_message, fg=color, font=("Lato", 20, "bold"))
         self.deal_button.config(state=tk.NORMAL)
 
         # Update game statistics
